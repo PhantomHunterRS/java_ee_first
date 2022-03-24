@@ -37,25 +37,27 @@ public class ProductRepository extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("New GET request");
-        if (req.getParameter("param1").isEmpty()) {
-            for (Product product : productList
-            ) {
-                resp.getWriter().printf("<h2>ID - %d - %s</h2>", product.getId(), product.toString());
-                resp.getWriter().println();
-            }
-        } else {
+        if (req.getParameter("param1") == null) {
+            req.setAttribute("products",productList);
+            getServletContext().getRequestDispatcher("products.jsp").forward(req,resp);
+        } else if(Integer.parseInt(req.getParameter("param1"))<=productList.size()) {
             int x = Integer.parseInt(req.getParameter("param1"));
-
             for (Product product : productList
             ) {
-                if (product.getId() == x) {
+                if (product.getId() == Integer.parseInt(req.getParameter("param1"))) {
                     resp.getWriter().printf("<h2> Product with ID = %d - %s</h2>",
-                            x, product.toString());
+                            Integer.parseInt(req.getParameter("param1")), product.toString());
                 }
             }
+        }else {
+            resp.getWriter().printf("<h2> Product with this ID = %d - %s</h2>",
+                    Integer.parseInt(req.getParameter("param1")),"does not exist");
         }
     }
 
+    public List<Product> getProductList() {
+        return productList;
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
