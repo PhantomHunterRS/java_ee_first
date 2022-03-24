@@ -1,25 +1,22 @@
 package com.phantom;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.Getter;
+import lombok.ToString;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+@Getter
+@ToString
+public class Product {
+    private int id;
+    private String title;
+    private double cost;
 
-public class Product extends HttpServlet {
-    private static Logger logger = LoggerFactory.getLogger(Product.class);
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.info("New GET request");
-        super.doGet(req, resp);
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+    public Product(int id,String title, double cost) {
+        this.id = id;
+        this.title = title;
+        this.cost = cost;
     }
 }
