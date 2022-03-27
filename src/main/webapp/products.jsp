@@ -14,7 +14,7 @@
 <body>
 <h1>Products Lists</h1>
 <ul>
-    <% for (Product product:(List<Product>)(request.getAttribute("products"))) { %>
+    <% for (Product product: (List<Product>)request.getAttribute("products")) { %>
     <li>id: <%=product.getId()%>, title: <%=product.getTitle()%>, cost: <%=product.getCost()%>
     </li>
     <% } %>

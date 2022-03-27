@@ -39,7 +39,7 @@ public class ProductRepository extends HttpServlet {
         logger.info("New GET request");
         if (req.getParameter("param1") == null) {
             req.setAttribute("products",productList);
-            getServletContext().getRequestDispatcher("products.jsp").forward(req,resp);
+            getServletContext().getRequestDispatcher("/products.jsp").forward(req,resp);
         } else if(Integer.parseInt(req.getParameter("param1"))<=productList.size()) {
             int x = Integer.parseInt(req.getParameter("param1"));
             for (Product product : productList
